@@ -7,6 +7,7 @@
     :copyright: (c) 2023 Vincent Sheffer.
     :license: MIT, see LICENSE for more details.
 """
+import logging
 import traceback
 from functools import wraps
 
@@ -15,6 +16,9 @@ from firebase_admin import auth as firebase_auth
 from flask import request, Response, json
 
 __version__ = '0.1.0'
+
+
+log = logging.getLogger("flask-firebaseauth")
 
 
 class FirebaseAuth(object):
@@ -76,7 +80,7 @@ class FirebaseAuth(object):
         """
         try:
             value = self.firebase_auth_api.verify_id_token(id_token)
-            print(f"value = {value}")
+            log.debug(f"value = {value}")
             self.app.firebase_user = value
             self.user_info = value
             return None
@@ -99,7 +103,7 @@ class FirebaseAuth(object):
 
         @wraps(view_func)
         def wrapper(*args, **kwargs) -> Response:
-            print(f"kwargs = {kwargs}")
+            log.debug(f"kwargs = {kwargs}")
             auth_header = request.headers.get('Authorization')
             if auth_header is None:
                 return self._return_error("Missing Authorization: Bearer header", 401)
