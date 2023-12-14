@@ -21,6 +21,18 @@ verifies that the token is valid and hasn't expired. To use:
 4.  In your Flask based RESTful service endpoints add
     @firebase_auth.required to each request.
 
+# Testing Locally
+
+The current version no longer supports Github actions for testing/deployment.
+But, you can test locally using a Docker container.  To test, first build a 
+local image:
+```shell
+docker build . -t local/test-flask-firebase-auth -f Dockerfile.test
+```
+then run the container:
+```shell
+docker run  local/test-flask-firebase-auth
+```
 # Links
 
 -   [Documentation](https://flask-firebaseauth.readthedocs.io/)
