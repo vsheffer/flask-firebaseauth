@@ -15,7 +15,7 @@ import firebase_admin.auth
 from firebase_admin import auth as firebase_auth
 from flask import request, Response, json
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 
 log = logging.getLogger("flask-firebaseauth")
